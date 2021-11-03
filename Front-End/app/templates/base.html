@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% if title %}
+        <title>{{ title }} - Search Bot</title>
+    {% else %}
+        <title>Welcome to SearchBot</title>
+    {% endif %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/nav-pane.css') }}">
+</head>
+<body>
+    <div>
+        <ul class="nav-bar">
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <!--<li><a href="{{ url_for('sports') }}">Sports</a></li>
+            <li><a href="{{ url_for('movies') }}">Movies</a></li>
+            <li><a href="{{ url_for('music') }}">Music</a></li> -->
+        </ul>
+    </div>
+
+    {% block content %}{% endblock %}
+</body>
+</html>

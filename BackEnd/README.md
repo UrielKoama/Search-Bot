@@ -1,0 +1,1 @@
+This directory holds all of the code associated with our project's backend Rest API.
