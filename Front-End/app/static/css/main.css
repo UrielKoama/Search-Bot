@@ -1,0 +1,73 @@
+.navpane ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.navpane li {
+    float: left;
+}
+
+.navpane li a {
+    display: block;
+    color: white;
+    text-align: center;
+
+    padding: 14px 16px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 18px;
+    text-transform: uppercase;
+}
+
+.navpane li a:hover {
+    background-color: #111;
+}
+
+body {
+    margin: 0px auto 0;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 5%
+}
+
+h2 {
+    text-align: center;
+}
+
+p {
+    text-align: center;
+}
+
+@media screen and (max-width: 600px) {
+    .navpane ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      background-color: #333;
+    }
+
+    .navpane li {
+        float: none;
+    }
+
+    .navpane li a {
+      display: block;
+      color: white;
+      padding: 8px 16px;
+      text-decoration: none;
+    }
+
+    /* Change the link color on hover */
+    .navpane li a:hover {
+      background-color: #111;
+    }
+}
