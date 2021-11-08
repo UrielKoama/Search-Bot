@@ -1,13 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{title}}</title>
-    <link rel="stylesheet" href="static/css/search-page.css">
-</head>
-<body style="font-family: Arial, Helvetica, sans-serif;">
     {% extends "base.html" %}
     {% block content %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/search-page.css') }}">
     <h1>Search for {{title}} using The Search Bot!</h1>
     <form id="form" role="search">
         <input type="search" id="query" name="q"
@@ -36,5 +31,4 @@
             </div>
         </div>
     {% endblock %}
-</body>
 </html>

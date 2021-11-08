@@ -1,12 +1,8 @@
-<html>
-<head>
-	<meta charset="UTF-8">
-	<title>{{title}}</title>
-</head>
-<body>
+<!DOCTYPE html>
+<html lang="en">
 	{% extends "base.html" %}
     {% block content %}
-    <h1 style="text-align: center;">Bug Report</h1>
+    <h1>Bug Report</h1>
     <br><br/>
     <form method='POST' action='./' style="text-align: center;">
 		<p style= "font-size:20px;"> We apologize for the inconvenience. Please describe the bug you found and we will do our best to fix it.</p>
@@ -24,5 +20,4 @@
 		<button type="submit">Submit Report</button>
 	</form>
 	{% endblock %}
-</body>
 </html>
