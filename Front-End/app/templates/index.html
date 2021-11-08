@@ -3,6 +3,56 @@
     {% extends "base.html" %}
 
     {% block content %}
-        <h1>Welcome to The Search Bot!</h1>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/homepage.css') }}">
+
+        <h1>Social Media Search API Service</h1>
+        <p class="desc">Have you ever wanted to be able to accumulate information on a specific topic from multiple social media platforms all with one search? Well you have come to the right place. Below are the topics that we currently support searches for:</p>
+
+        <div class="row">
+            <div class="column">
+                <div class="card">
+                    <p><strong>Music</strong></p>
+                    <p>Search for the latest news, rumours, and other posts for your favorite artist, song, and much more</p>
+                    <a href="{{ url_for('index') }}">Search Now &#x2192;</a>
+                </div>
+            </div>
+            <div class="column">
+                <div class="card">
+                    <p><strong>Movies</strong></p>
+                    <p>Search for the latest news, rumours, and other posts for new movies, your favorite actor, and much more</p>
+                    <a href="{{ url_for('index') }}">Search Now &#x2192;</a>
+                </div>
+            </div>
+            <div class="column">
+                <div class="card">
+                    <p><strong>Sports</strong></p>
+                    <p>Search for the latest transfer news, injury news, and other posts for your favorite team, player, and much more</p>
+                    <a href="{{ url_for('index') }}">Search Now &#x2192;</a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <div class="card">
+                    <p><strong>Gaming</strong></p>
+                    <p>Coming Soon!</p>
+                    <p class="placeholder">Search Now &#x2192;</p>
+                </div>
+            </div>
+            <div class="column">
+                <div class="card">
+                    <p><strong>Technology</strong></p>
+                    <p>Coming Soon!</p>
+                    <p class="placeholder">Search Now &#x2192;</p>
+                </div>
+            </div>
+            <div class="column">
+                <div class="card">
+                    <p><strong>Politics</strong></p>
+                    <p>Coming Soon!</p>
+                    <p class="placeholder">Search Now &#x2192;<p>
+                </div>
+            </div>
+        </div>
     {% endblock %}
 </html>
