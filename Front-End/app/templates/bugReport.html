@@ -1,16 +1,14 @@
 <html>
 <head>
-    <style>
-    h1 {text-align: center;}
-    form {text-align: center;}
-
-    </style>
-    <title> </title>
+	<meta charset="UTF-8">
+	<title>{{title}}</title>
 </head>
 <body>
-    <h1>Bug Report</h1>
+	{% extends "base.html" %}
+    {% block content %}
+    <h1 style="text-align: center;">Bug Report</h1>
     <br><br/>
-    <form method='POST' action='./'>
+    <form method='POST' action='./' style="text-align: center;">
 		<p style= "font-size:20px;"> We apologize for the inconvenience. Please describe the bug you found and we will do our best to fix it.</p>
 		<br><br/>
 		<label for='issue-description'>Describe the bug:</label>
@@ -25,5 +23,6 @@
         <br><br/>
 		<button type="submit">Submit Report</button>
 	</form>
+	{% endblock %}
 </body>
 </html>
