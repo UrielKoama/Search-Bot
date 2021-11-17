@@ -22,8 +22,21 @@ def connect_to_endpoint(url, params):
 def build_query_string(params):
     query_string = '('
 
-    for keyword in params['keywords']:
-        pass
+    for keyword_index in range(len(params['keywords'])):
+        if keyword_index == len(params['keywords']) - 1:
+            query_string += params['keywords'][keyword_index]
+        else:
+            query_string += f"{params['keywords'][keyword_index]} "
+
+    if params['username']:
+        query_string += f" from:{params['username']}"
+
+    query_string += ')'
+
+    if params['verified']:
+        query_string += ' is:verified'
+
+    query_string += ' lang:en'
 
     # TODO: Need to confirm which of these fields are necessary and how to get the URL to view the tweet
     return {'query': query_string,
