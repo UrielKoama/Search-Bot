@@ -3,20 +3,21 @@ import os
 import json
 
 # Grab the bearer token for the authentication
-bearer_token = os.environ.get("BEARER_TOEKN")
+bearer_token = os.environ.get("BEARER_TOKEN")
 
 search_url = "https://api.twitter.com/2/tweets/search/recent"
-
 
 def bearer_oauth(r):
     r.headers["Authorization"] = f"Bearer {bearer_token}"
     r.headers["User-Agent"] = "v2RecentSearchPython"
+    print(r.headers)
     return r
 
 def connect_to_endpoint(url, params):
     response = requests.get(url, auth=bearer_oauth, params=params)
+    print(response)
     if response.status_code != 200:
-        raise Exception(response.status_code, response.txt)
+        raise Exception(response.status_code)
     return response.json()
 
 def build_query_string(params):
@@ -35,6 +36,9 @@ def build_query_string(params):
 
     if params['verified']:
         query_string += ' is:verified'
+
+    if params['retweet']:
+        query_string += ''
 
     query_string += ' lang:en'
 
