@@ -1,3 +1,4 @@
+drop DATABASE if exists searchbotDB;
 create DATABASE if NOT exists searchbotDB;
 use searchbotDB;
 
