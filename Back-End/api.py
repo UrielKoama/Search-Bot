@@ -42,7 +42,7 @@ class Search(Resource):
 
         # TODO: Need to send keywords to the keyword validation logic
         query_params_dict = parse_args(args)
-        return search_twitter.perform_search(query_params_dict)
+        return {search_type: search_twitter.perform_search(query_params_dict)}
 
 
 api.add_resource(Search, '/search/<string:search_type>')

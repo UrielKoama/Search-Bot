@@ -2,7 +2,8 @@ import requests
 import os
 
 # Grab the bearer token for the authentication
-bearer_token = os.environ.get("BEARER_TOKEN")
+bearer_token = "AAAAAAAAAAAAAAAAAAAAAECMVgEAAAAAYSd9nqOln2jqjpKlkXhT%2FLcITKA%3DAVWIrz60aajPxrbqBgnd3CdeqAfAnFvxMDp9sCeXBYXveAzoEl"
+#os.environ.get("BEARER_TOKEN")
 
 search_url = "https://api.twitter.com/2/tweets/search/recent"
 
@@ -50,11 +51,17 @@ def build_query_string(params):
             'expansions': 'author_id'}
 
 def parse_json(json_response):
-    return {'username': json_response['includes']['users'][0]['name'],
-            'text': json_response['data'][0]['text']}
+    parsed_json_list = []
+    for indices in range(len(json_response['data'])):
+        parsed_json_list.append(
+            {'username': json_response['includes']['users'][indices]['name'],
+             'text': json_response['data'][indices]['text']}
+        )
+    return parsed_json_list
 
 
 # Params will contain all parameters the user input and it will be sent over as a dictionary of lists
 def perform_search(params):
     json_response = connect_to_endpoint(search_url, build_query_string(params))
+    print(json_response)
     return parse_json(json_response)

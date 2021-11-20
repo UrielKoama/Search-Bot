@@ -14,7 +14,9 @@
             <div class="column">
                 <div class="card">
                     <p><strong><u>Twitter Results</u></strong></p>
-                    <p>Put Twitter Results Here dslkfnslkfsdklnflksd sdfk sdlf slkf sdlk fsdlk fslk dflsk flsk dflk sdlfk sldk fsdlk fslk fslk fslk dflsk dfsk fsk fslk dfslk dfsk dfsl kfs fsdlkf sdf slfk sldf ksl kdf!</p>
+                    {% for result_dict in twitter_results_list %}
+                        <p>{{ result_dict['username'] }} tweeted: "{{ result_dict['text'] }}"</p> <br/>
+                    {% endfor %}
                 </div>
             </div>
             <div class="column">
