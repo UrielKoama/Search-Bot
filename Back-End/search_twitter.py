@@ -1,6 +1,5 @@
 import requests
 import os
-import json
 
 # Grab the bearer token for the authentication
 bearer_token = os.environ.get("BEARER_TOKEN")
@@ -29,27 +28,33 @@ def build_query_string(params):
         else:
             query_string += f"{params['keywords'][keyword_index]} "
 
-    if params['username']:
+    if 'username' in params:
         query_string += f" from:{params['username']}"
 
     query_string += ')'
 
-    if params['verified']:
+    if 'verified' in params:
         query_string += ' is:verified'
 
-    if params['retweet']:
-        query_string += ''
+    if 'retweet' in params:
+        query_string += ' is:retweet'
+    else:
+        query_string += ' -is:retweet'
 
     query_string += ' lang:en'
 
-    # TODO: Need to confirm which of these fields are necessary and how to get the URL to view the tweet
+    # TODO: Need to confirm how to get the URL to view the tweet
     return {'query': query_string,
-            'tweet.fields': 'id,author_id,text,source',
-            'user.fields': 'username,url,verified',
+            'tweet.fields': 'text',
+            'user.fields': 'username',
             'expansions': 'author_id'}
+
+def parse_json(json_response):
+    return {'username': json_response['includes']['users'][0]['name'],
+            'text': json_response['data'][0]['text']}
+
 
 # Params will contain all parameters the user input and it will be sent over as a dictionary of lists
 def perform_search(params):
     json_response = connect_to_endpoint(search_url, build_query_string(params))
-    # TODO: Add in logic to parse JSON response
-    print(json.dumps(json_response, indent=4, sort_keys=True))
+    return parse_json(json_response)

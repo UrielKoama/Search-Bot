@@ -31,7 +31,9 @@ class Search(Resource):
         self.reqparse = reqparse.RequestParser()
         self.reqparse.add_argument('keywords', required=True, help='Keywords to query twitter for', action='append')
         self.reqparse.add_argument('username', help='Twitter user that you want to filter tweets from')
-        self.reqparse.add_argument('verified', required=True, help='Defines if you want to view tweets from only verified users')
+        self.reqparse.add_argument('verified', help='Defines if you want to view tweets from only verified users')
+        self.reqparse.add_argument('retweet', help='Defines if you want to view original tweets and retweets or just original tweets')
+
         super(Search, self).__init__()
 
     def get(self, search_type):
@@ -40,8 +42,7 @@ class Search(Resource):
 
         # TODO: Need to send keywords to the keyword validation logic
         query_params_dict = parse_args(args)
-        search_twitter.perform_search(query_params_dict)
-        return {search_type: query_params_dict['keywords']}
+        return search_twitter.perform_search(query_params_dict)
 
 
 api.add_resource(Search, '/search/<string:search_type>')
