@@ -14,14 +14,17 @@ def abort_if_search_doesnt_exist(search_type):
 def parse_args(args):
     query_params_dict = dict()
 
-    if args['keywords']:
+    if 'keywords' in args:
         query_params_dict['keywords'] = args['keywords']
 
-    if args['username']:
+    if 'verified' in args:
+        query_params_dict['verified'] = True
+
+    if 'username' in args:
         query_params_dict['username'] = args['username']
 
-    if args['verified'] == 'true':
-        query_params_dict['verified'] = True
+    if 'retweet' in args:
+        query_params_dict['retweet'] = True
 
     return query_params_dict
 

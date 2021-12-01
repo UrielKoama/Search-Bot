@@ -2,8 +2,7 @@ import requests
 import os
 
 # Grab the bearer token for the authentication
-bearer_token = "AAAAAAAAAAAAAAAAAAAAAECMVgEAAAAAYSd9nqOln2jqjpKlkXhT%2FLcITKA%3DAVWIrz60aajPxrbqBgnd3CdeqAfAnFvxMDp9sCeXBYXveAzoEl"
-#os.environ.get("BEARER_TOKEN")
+bearer_token = os.environ.get("BEARER_TOKEN")
 
 search_url = "https://api.twitter.com/2/tweets/search/recent"
 
