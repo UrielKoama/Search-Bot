@@ -9,22 +9,22 @@
         <p>{{ form.submit }}</p>
     </form>
             <div class="row">
-            <div class="column-twitter">
-                <div class="card">
+            <div class="column">
+                <div class="card-twitter">
                     <p><strong><u>Twitter Results</u></strong></p>
                     {% for result_dict in twitter_results_list %}
                         <p>{{ result_dict['username'] }} tweeted: "{{ result_dict['text'] }}"</p> <br/>
                     {% endfor %}
                 </div>
             </div>
-            <div class="column-rest">
-                <div class="card">
+            <div class="column">
+                <div class="card-rest">
                     <p><strong><u>Instagram Results</u></strong></p>
                     <p>Coming Soon!</p>
                 </div>
             </div>
-            <div class="column-rest">
-                <div class="card">
+            <div class="column">
+                <div class="card-rest">
                     <p><strong><u>Facebook Results</u></strong></p>
                     <p>Coming Soon!</p>
                 </div>

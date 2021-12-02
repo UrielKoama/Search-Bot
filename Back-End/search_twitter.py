@@ -48,12 +48,14 @@ def build_query_string(params):
             'user.fields': 'username',
             'expansions': 'author_id'}
 
-def parse_json(json_response):
+def parse_json(json_response, username_filtered):
     parsed_json_list = []
     for indices in range(len(json_response['data'])):
         parsed_json_list.append(
-            {'username': json_response['includes']['users'][indices]['name'],
-             'text': json_response['data'][indices]['text']}
+            {
+                'username': json_response['includes']['users'][indices]['name'] if not username_filtered else json_response['includes']['users'][0]['name'],
+                'text': json_response['data'][indices]['text']
+            }
         )
     return parsed_json_list
 
@@ -61,4 +63,4 @@ def parse_json(json_response):
 # Params will contain all parameters the user input and it will be sent over as a dictionary of lists
 def perform_search(params):
     json_response = connect_to_endpoint(search_url, build_query_string(params))
-    return parse_json(json_response)
+    return parse_json(json_response, True if 'username' in params else False)
