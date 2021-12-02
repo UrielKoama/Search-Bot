@@ -23,6 +23,7 @@ def process_input(data):
             if j[0].lower() == "retweet":
                 if j[1].lower() == "true":
                     query_string["retweet"] = "true"
+        print(query_string)
         return query_string
 
 @app.route('/')
@@ -35,28 +36,31 @@ def sports():
     form = SearchForm(request.form)
     params = process_input(form.search_queries.data)
     if form.search_queries.data != None:
-        requests.get("http://127.0.0.1:5000/search/sports", params=params)
-    return render_template('searchpage.html', form=form, title='Sports')
+        response = requests.get("http://127.0.0.1:5001/search/sports", params=params).json()
+    else:
+        response = {'sports': list()}
+    return render_template('searchpage.html', form=form, title='Sports', twitter_results_list=response['sports'])
 
 @app.route('/movies', methods=['GET', 'POST'])
 def movies():
     form = SearchForm(request.form)
     params = process_input(form.search_queries.data)
     if form.search_queries.data != None:
-        requests.get("http://127.0.0.1:5000/search/movies", params=params)
-    return render_template('searchpage.html', form=form, title='Movies')
+        response = requests.get("http://127.0.0.1:5001/search/movie", params=params).json()
+    else:
+        response = {'movie': list()}
+    return render_template('searchpage.html', form=form, title='Movies', twitter_results_list=response['movie'])
 
 @app.route('/music', methods=['GET', 'POST'])
 def music():
     form = SearchForm(request.form)
     params = process_input(form.search_queries.data)
     if form.search_queries.data != None:
-        requests.get("http://127.0.0.1:5000/search/music", params=params)
-    return render_template('searchpage.html', form=form, title='Music')
+        response = requests.get("http://127.0.0.1:5001/search/music", params=params).json()
+    else:
+        response = {'music': list()}
+    return render_template('searchpage.html', form=form, title='Music', twitter_results_list=response['music'])
 
 @app.route('/bugreport')
 def bugreport():
     return render_template('bugReport.html', title='Bug Reports')
-
-# create another route for the forms to go to
-    # query to url that api.py has

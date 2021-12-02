@@ -21,7 +21,14 @@
 }
 
 /* Float four columns side by side */
-.column {
+.column-twitter {
+  float: left;
+  width: 33%;
+  padding: 0 10px;
+  align-items: stretch;
+  overflow: auto;
+}
+.column-rest {
   float: left;
   width: 33%;
   padding: 0 10px;

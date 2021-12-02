@@ -2,7 +2,8 @@ import requests
 import os
 
 # Grab the bearer token for the authentication
-bearer_token = os.environ.get("BEARER_TOKEN")
+bearer_token = "AAAAAAAAAAAAAAAAAAAAAECMVgEAAAAAYSd9nqOln2jqjpKlkXhT%2FLcITKA%3DAVWIrz60aajPxrbqBgnd3CdeqAfAnFvxMDp9sCeXBYXveAzoEl"
+#os.environ.get("BEARER_TOKEN")
 
 search_url = "https://api.twitter.com/2/tweets/search/recent"
 
@@ -36,9 +37,7 @@ def build_query_string(params):
     if 'verified' in params:
         query_string += ' is:verified'
 
-    if 'retweet' in params:
-        query_string += ' is:retweet'
-    else:
+    if 'retweet' not in params:
         query_string += ' -is:retweet'
 
     query_string += ' lang:en'
@@ -62,5 +61,4 @@ def parse_json(json_response):
 # Params will contain all parameters the user input and it will be sent over as a dictionary of lists
 def perform_search(params):
     json_response = connect_to_endpoint(search_url, build_query_string(params))
-    print(json_response)
     return parse_json(json_response)

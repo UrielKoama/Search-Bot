@@ -14,16 +14,16 @@ def abort_if_search_doesnt_exist(search_type):
 def parse_args(args):
     query_params_dict = dict()
 
-    if 'keywords' in args:
-        query_params_dict['keywords'] = args['keywords']
+    if 'keyword' in args:
+        query_params_dict['keywords'] = args['keyword']
 
-    if 'verified' in args:
+    if args['verified']:
         query_params_dict['verified'] = True
 
-    if 'username' in args:
+    if args['username'] != "":
         query_params_dict['username'] = args['username']
 
-    if 'retweet' in args:
+    if args['retweet']:
         query_params_dict['retweet'] = True
 
     return query_params_dict
@@ -32,7 +32,7 @@ def parse_args(args):
 class Search(Resource):
     def __init__(self):
         self.reqparse = reqparse.RequestParser()
-        self.reqparse.add_argument('keywords', required=True, help='Keywords to query twitter for', action='append')
+        self.reqparse.add_argument('keyword', required=True, help='Keywords to query twitter for', action='append')
         self.reqparse.add_argument('username', help='Twitter user that you want to filter tweets from')
         self.reqparse.add_argument('verified', help='Defines if you want to view tweets from only verified users')
         self.reqparse.add_argument('retweet', help='Defines if you want to view original tweets and retweets or just original tweets')
@@ -51,4 +51,4 @@ class Search(Resource):
 api.add_resource(Search, '/search/<string:search_type>')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=5001)
