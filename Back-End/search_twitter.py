@@ -15,7 +15,6 @@ def bearer_oauth(r):
 
 def connect_to_endpoint(url, params):
     response = requests.get(url, auth=bearer_oauth, params=params)
-    print(response)
     if response.status_code != 200:
         raise Exception(response.status_code)
     return response.json()
@@ -49,15 +48,17 @@ def build_query_string(params):
             'expansions': 'author_id'}
 
 def parse_json(json_response, username_filtered):
-    parsed_json_list = []
-    for indices in range(len(json_response['data'])):
-        parsed_json_list.append(
-            {
-                'username': json_response['includes']['users'][indices]['name'] if not username_filtered else json_response['includes']['users'][0]['name'],
-                'text': json_response['data'][indices]['text']
-            }
-        )
-    return parsed_json_list
+    if json_response['meta']['result_count'] != 0:
+        parsed_json_list = []
+        for indices in range(len(json_response['data'])):
+            parsed_json_list.append(
+                {
+                    'username': json_response['includes']['users'][indices]['name'] if not username_filtered else json_response['includes']['users'][0]['name'],
+                    'text': json_response['data'][indices]['text']
+                }
+            )
+        return parsed_json_list
+    return [{'error': 'No Results Found!'}]
 
 
 # Params will contain all parameters the user input and it will be sent over as a dictionary of lists

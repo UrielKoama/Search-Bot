@@ -13,7 +13,11 @@
                 <div class="card-twitter">
                     <p><strong><u>Twitter Results</u></strong></p>
                     {% for result_dict in twitter_results_list %}
-                        <p>{{ result_dict['username'] }} tweeted: "{{ result_dict['text'] }}"</p> <br/>
+                        {% if 'username' in result_dict and 'text' in result_dict %}
+                            <p>{{ result_dict['username'] }} tweeted: "{{ result_dict['text'] }}"</p> <br/>
+                        {% else %}
+                            <p><strong>{{ result_dict['error'] }}</strong></p>
+                        {% endif %}
                     {% endfor %}
                 </div>
             </div>

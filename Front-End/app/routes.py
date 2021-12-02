@@ -23,7 +23,6 @@ def process_input(data):
             if j[0].lower() == "retweet":
                 if j[1].lower() == "true":
                     query_string["retweet"] = "true"
-        print(query_string)
         return query_string
 
 @app.route('/')
