@@ -1,16 +1,15 @@
 import requests
-import os
 
 # Grab the bearer token for the authentication
-bearer_token = "AAAAAAAAAAAAAAAAAAAAAECMVgEAAAAAYSd9nqOln2jqjpKlkXhT%2FLcITKA%3DAVWIrz60aajPxrbqBgnd3CdeqAfAnFvxMDp9sCeXBYXveAzoEl"
-#os.environ.get("BEARER_TOKEN")
+bearer_token_file = open("bearer_token")
+bearer_token = bearer_token_file.readline()
+bearer_token_file.close()
 
 search_url = "https://api.twitter.com/2/tweets/search/recent"
 
 def bearer_oauth(r):
     r.headers["Authorization"] = f"Bearer {bearer_token}"
     r.headers["User-Agent"] = "v2RecentSearchPython"
-    print(r.headers)
     return r
 
 def connect_to_endpoint(url, params):
@@ -41,8 +40,11 @@ def build_query_string(params):
 
     query_string += ' lang:en'
 
-    # TODO: Need to confirm how to get the URL to view the tweet
-    return {'query': query_string,
+    return query_string
+
+
+def get_params(params):
+    return {'query': build_query_string(params),
             'tweet.fields': 'text',
             'user.fields': 'username',
             'expansions': 'author_id'}
@@ -63,5 +65,5 @@ def parse_json(json_response, username_filtered):
 
 # Params will contain all parameters the user input and it will be sent over as a dictionary of lists
 def perform_search(params):
-    json_response = connect_to_endpoint(search_url, build_query_string(params))
+    json_response = connect_to_endpoint(search_url, get_params(params))
     return parse_json(json_response, True if 'username' in params else False)

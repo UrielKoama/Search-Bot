@@ -43,4 +43,3 @@ constraint music_fk
 	foreign key (music_keyID) REFERENCES music(music_id)
 );
 
-
