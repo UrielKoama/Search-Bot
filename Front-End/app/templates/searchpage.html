@@ -4,27 +4,31 @@
     {% block content %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/search-page.css') }}">
     <h1>Search for {{title}} using The Search Bot!</h1>
-    <form id="form" role="search">
-        <input type="search" id="query" name="q"
-            placeholder="Key1, Key2, Key3..."
-            aria-label="Search through site content">
-        <button>Search</button>
+    <form action="" method="post" novalidate>
+        <p>{{ form.search_queries }}</p>
+        <p>{{ form.submit }}</p>
     </form>
             <div class="row">
             <div class="column">
-                <div class="card">
+                <div class="card-twitter">
                     <p><strong><u>Twitter Results</u></strong></p>
-                    <p>Put Twitter Results Here dslkfnslkfsdklnflksd sdfk sdlf slkf sdlk fsdlk fslk dflsk flsk dflk sdlfk sldk fsdlk fslk fslk fslk dflsk dfsk fsk fslk dfslk dfsk dfsl kfs fsdlkf sdf slfk sldf ksl kdf!</p>
+                    {% for result_dict in twitter_results_list %}
+                        {% if 'username' in result_dict and 'text' in result_dict %}
+                            <p>{{ result_dict['username'] }} tweeted: "{{ result_dict['text'] }}"</p> <br/>
+                        {% else %}
+                            <p><strong>{{ result_dict['error'] }}</strong></p>
+                        {% endif %}
+                    {% endfor %}
                 </div>
             </div>
             <div class="column">
-                <div class="card">
+                <div class="card-rest">
                     <p><strong><u>Instagram Results</u></strong></p>
                     <p>Coming Soon!</p>
                 </div>
             </div>
             <div class="column">
-                <div class="card">
+                <div class="card-rest">
                     <p><strong><u>Facebook Results</u></strong></p>
                     <p>Coming Soon!</p>
                 </div>
